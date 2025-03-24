@@ -1766,6 +1766,7 @@ class Switch():
                                   add_on = ""
                              else:
                                  command_add_on =  "switchport port-security aging time " + interface["aging time"]
+                                 #Do something then
                         else:
                              print("!!! Not a valid sticky value !!!".upper())
                    elif type_interface == "range":
@@ -1776,7 +1777,7 @@ class Switch():
                    else:
                          print("!!! Not a valid interface type !!!".upper())
               
-
+ 
 
 
 
