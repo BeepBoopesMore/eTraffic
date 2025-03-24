@@ -1,0 +1,42 @@
+{
+  "interfaces":[
+
+    {
+
+        "main_interface":"g0/2",
+        "sub_interface":".10",
+        "sub_interface_ip":"10.0.0.255",
+        "subnet_mask":"255.255",
+        "vlan":3,
+        "native_vlan":"None/Value"
+
+
+
+
+    },
+
+    {
+
+        "main_interface":"g0/0",
+        "sub_interface":".20",
+        "sub_interface_ip":"10.0.0.255",
+        "subnet_mask":32,
+        "vlan":3,
+        "native_vlan":"None/Value"
+
+
+
+        
+
+
+
+
+    }
+
+
+
+  ]
+
+
+
+}

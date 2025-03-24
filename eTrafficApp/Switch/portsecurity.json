@@ -1,0 +1,18 @@
+
+
+
+
+
+{
+    "interface": "GigabitEthernet0/0/1",
+    "interface_type":"single or range",
+    "sticky": "true or false",
+    "aging time": "time or default",
+    "violation":"shutdown or restrict or protect",
+    "secure mac adress": "mac adress or default ",
+    "maximum mac adress": 2
+
+
+    
+
+}

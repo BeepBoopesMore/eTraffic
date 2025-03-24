@@ -1,0 +1,6 @@
+
+
+{
+    "interfaces_receive":["g0/0","g0/1"],
+    "interfaces_transmit":["f0/0","g0/1"]
+}
