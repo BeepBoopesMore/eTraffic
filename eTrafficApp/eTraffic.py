@@ -1505,7 +1505,7 @@ class Router():
                print("!!!You have to select a Layer 2 Discovery Method...")
 
             print("")
-        elif self.vendor == "cisco":
+        elif self.vendor.lower() == "cisco":
             #Checking the boolean 
             if cdp == True and lldp == False:
                  #prefered_thing = "CDP"
@@ -1619,118 +1619,126 @@ class TFTP_SERVER():
 #Switch LATER ON
 class Switch():
     def __init__(self,host:str,username:str,password:str,vendor:str):
-         self.host = host
-         self.username = username
-         self.password = password
-         self.vendor = vendor     
-         #Patterns 
-         #Vlan
-         pattern_vlan_name = r'^\d+\s+([A-Za-z0-9\s]+)\s+(\w+)\s+'
-         pattern_vlan2 = r'^\d+\s+[a-zA-Z0-9\s]+(?:\s+active)?\s+([a-zA-Z0-9/,\s]+)'
-         #Interfaces
-         #
-         #
-         #Other
-         #
+         try:
+               self.host = host
+               self.username = username
+               self.password = password
+               self.vendor = vendor
+               #Patterns 
+               #Vlan
+               pattern_vlan_name = r'^\d+\s+([A-Za-z0-9\s]+)\s+(\w+)\s+'
+               pattern_vlan2 = r'^\d+\s+[a-zA-Z0-9\s]+(?:\s+active)?\s+([a-zA-Z0-9/,\s]+)'
+               #Interfaces
+               #
+               #
+               #Other
+               #
 
 
 
-     
-         #Defining the values just like at the Router
-         if self.vendor.lower() == "cisco":
-          #Commands for show  self for Cisco 
-          #Model
-          command1 = "enable && show model"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command1)
-          command_output1 = "".join(_stdout.read().decode())
-          self.model = command_output1
-          #Vlans
-          command2 = "enable && show vlan brief"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command2)
-          command_output2 = "".join(_stdout.read().decode())
-          self.vlans = command_output2
-          #Clock
-          command3 = "enable && show clock"  
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command3)
-          command_output3 = "".join(_stdout.read().decode())
-          self.clock = command_output3
-          #Logging
-          command4 = "enable && show logging"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command4)
-          command_output4 = "".join(_stdout.read().decode())
-          self.logging = command_output4
-          #Spanning Tree
-          command5 = "enable && show spanning-tree"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command5)
-          command_output5 = "".join(_stdout.read().decode())
-          self.spanning_tree = command_output5
-          #Port Security
-          command6 = "enable && show port-security"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command6)
-          command_output6 = "".join(_stdout.read().decode())
-          self.port_security = command_output6
-          #Privilege
-          command7 = "enable && show privilege"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command7)
-          command_output7 = "".join(_stdout.read().decode())
-          self.privilege = command_output7
-          #SNMP
-          command8 = "enable && show snmp"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command8)
-          command_output8 = "".join(_stdout.read().decode())
-          self.snmp = command_output8
-          #Access-lists
-          command9 = "enable && show access-lists"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command9)
-          command_output9 = "".join(_stdout.read().decode())
-          self.access_lists = command_output9
-          #VTP
-          command10 = "enable && show vtp status"
-          client = paramiko.client.SSHClient()
-          client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-          client.connect(self.host, username=self.username, password=self.password)
-          _stdin, _stdout,_stderr = client.exec_command(command10)
-          command_output10 = "".join(_stdout.read().decode())
-          self.vtp = command_output10
+               
+               #Defining the values just like at the Router
+               if self.vendor.lower() == "cisco":
+                    #Commands for show  self for Cisco 
+                    #Model
+                    command1 = "enable && show model"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command1)
+                    command_output1 = "".join(_stdout.read().decode())
+                    self.model = command_output1
+                    #Vlans
+                    command2 = "enable && show vlan brief"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command2)
+                    command_output2 = "".join(_stdout.read().decode())
+                    self.vlans = command_output2
+                    #Clock
+                    command3 = "enable && show clock"  
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command3)
+                    command_output3 = "".join(_stdout.read().decode())
+                    self.clock = command_output3
+                    #Logging
+                    command4 = "enable && show logging"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command4)
+                    command_output4 = "".join(_stdout.read().decode())
+                    self.logging = command_output4
+                    #Spanning Tree
+                    command5 = "enable && show spanning-tree"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command5)
+                    command_output5 = "".join(_stdout.read().decode())
+                    self.spanning_tree = command_output5
+                    #Port Security
+                    command6 = "enable && show port-security"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command6)
+                    command_output6 = "".join(_stdout.read().decode())
+                    self.port_security = command_output6
+                    #Privilege
+                    command7 = "enable && show privilege"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command7)
+                    command_output7 = "".join(_stdout.read().decode())
+                    self.privilege = command_output7
+                    #SNMP
+                    command8 = "enable && show snmp"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command8)
+                    command_output8 = "".join(_stdout.read().decode())
+                    self.snmp = command_output8
+                    #Access-lists
+                    command9 = "enable && show access-lists"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command9)
+                    command_output9 = "".join(_stdout.read().decode())
+                    self.access_lists = command_output9
+                    #VTP
+                    command10 = "enable && show vtp status"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command10)
+                    command_output10 = "".join(_stdout.read().decode())
+                    self.vtp = command_output10
 
 
 
-          #Commands and self commands for cisco
-         elif self.vendor.lower() == "juniper":
-          command = ""
- 
-
+                    #Commands and self commands for cisco
+               elif self.vendor.lower() == "juniper":
+                    command = ""
+         except paramiko.ssh_exception.NoValidConnectionsError:
+              d = "!!!!!! The connection doesn't exist or the host doesn't allow ssh connections.. !!!!!!!!".upper()
+              print(d)
+         except TimeoutError:
+              print("!!! OOPS SOMETHING HAPPENED BUT MOST LIKELY THE HOST IS DOWN OR DOESN'T EXIST OR DOESN'T ACCEPT PORT 22 !!!")
+         except UnicodeError:
+              print("!!! rewrite the router info  , it is not valid you idiot !!!  ".upper())
+              pass
+  
 
 
           #Save the configuration
-          def write(self):
+    def write(self):
                command = "enable && write"
                client = paramiko.client.SSHClient()
                client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
@@ -1739,47 +1747,74 @@ class Switch():
                command_output = "".join(_stdout.read().decode())
                print(command_output)
           #Shows the vlans
-         def show_vlans(self):
-               command = "enable && show vlan brief"
-               client = paramiko.client.SSHClient()
-               client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-               client.connect(self.host, username=self.username, password=self.password)
-               _stdin, _stdout,_stderr = client.exec_command(command)
-               command_output = "".join(_stdout.read().decode())
-               print(command_output)
+    def show_vlans(self):
+               if self.vendor.lower() == "cisco":
+                    command = "enable && show vlan brief"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command)
+                    command_output = "".join(_stdout.read().decode())
+                    print(command_output)
+               elif self.vendor.lower() == "juniper":
+                    command = "show vlans"
+                    client = paramiko.client.SSHClient()
+                    client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
+                    client.connect(self.host, username=self.username, password=self.password)
+                    _stdin, _stdout,_stderr = client.exec_command(command)
+                    command_output = "".join(_stdout.read().decode())
+                    print(command_output)
           #Create Port Security 
           #Do tomorrow 
-         def manage_port_security(self,file_path:str):
-              with open(file_path,"r") as file:
-                   data = json.load(file)
-                   type_interface = data["interface_type"]
-                   interface = data["interface"]
-                   if type_interface == "single":
-                        command_first = "enable && configure terminal && interface " + interface + " && switchport port-security && exit && write"
-                        command_second = "enable && configure terminal && interface " + interface + " && switchport port-security "
-                        if interface["sticky"] == "true":
-                             command_add_on = "mac-address sticky"
-                        elif interface["sticky"] == "false":
-                             #Do after 
-                             if interface["aging time"] == "default":
-                                  #No command add on
-                                  add_on = ""
-                             else:
-                                 command_add_on =  "switchport port-security aging time " + interface["aging time"]
-                                 #Do something then
-                        else:
-                             print("!!! Not a valid sticky value !!!".upper())
-                   elif type_interface == "range":
-                        command_first = "enable && configure terminal && interface range " + interface + " && switchport port-security && exit && write"
-                        
+    def manage_port_security(self,file_path:str):
+         try:
+             if self.vendor.lower() == "cisco":
+                  with open(file_path,"r") as file:
+                       data = json.load(file)
 
-
-                   else:
-                         print("!!! Not a valid interface type !!!".upper())
-              
+                        #Data 
+                       main_interface = data["interface"]
+                       interface_type = data["interface_type"]
+                       sticky = data["sticky"]
+                       aging_time = data["aging_time"]
+                       violation = data["violation"]
+                       secure_mac = data["secure_mac_address"]
+                       maximum_mac_addressess = data["maximum_mac_address"]
  
 
+                       if "".join(interface_type).lower() == "single":
+                            #Checking if the interface has switchport mode trunk or access:
+                            command_check_interface = "enable && show "
 
+
+                            
+                            command_prefix1 = " interface " + main_interface
+
+
+                            #Something after 
+                            if sticky == True:
+                                 command_prefix2 = " && switchport port-security mac-address sticky"
+                            else:
+                                command_prefix2 =  " switchport port-security mac-address " + secure_mac
+                       elif "".join(interface_type).lower() == "range":
+                            #Checking if the inerface has switchport mode trunk or access:
+                            
+
+
+
+                            #Something after
+                            command_prefix1 = " interface range " + main_interface
+                       else:
+                               print("!!! Not a valid interface type !!!")
+
+                  
+         #Error Handling 
+         except:
+              print("Will do later for sure ")
+              
+              
+
+ 
 
 
 

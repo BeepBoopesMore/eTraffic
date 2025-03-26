@@ -1,5 +1,5 @@
 import paramiko.ssh_exception
-from eTrafficApp.eTraffic import Router
+from eTrafficApp import Router
 import paramiko
 
 
